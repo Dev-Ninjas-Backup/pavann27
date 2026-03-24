@@ -249,11 +249,11 @@ class HomePageScreen extends StatelessWidget {
         ),
         SizedBox(width: 12.w),
         Container(
-          height: 58.h,
-          width: 58.h,
+          height: 42.h,
+          width: 42.h,
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(18.r),
+            borderRadius: BorderRadius.circular(8.r),
           ),
           child: const Icon(
             Icons.tune_rounded,
