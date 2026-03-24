@@ -226,13 +226,14 @@ class HomePageScreen extends StatelessWidget {
       children: [
         Expanded(
           child: Container(
-            height: 58.h,
+            height: 42.h,
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(18.r),
+              borderRadius: BorderRadius.circular(8.r),
             ),
             child: TextField(
               controller: controller.searchController,
+              textAlignVertical: TextAlignVertical.center,
               decoration: InputDecoration(
                 hintText: 'Find your ally',
                 hintStyle: TextStyle(
@@ -241,7 +242,7 @@ class HomePageScreen extends StatelessWidget {
                 ),
                 prefixIcon: const Icon(Icons.search, color: textColor),
                 border: InputBorder.none,
-                contentPadding: EdgeInsets.symmetric(vertical: 18.h),
+                contentPadding: EdgeInsets.zero,
               ),
             ),
           ),
