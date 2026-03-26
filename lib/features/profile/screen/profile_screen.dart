@@ -103,38 +103,32 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     SizedBox(width: 10.w),
                     // Wallet
-                    Flexible(
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 12.w, vertical: 10.h),
-                        decoration: BoxDecoration(
-                          color: AppColors.lightPurple,
-                          borderRadius: BorderRadius.circular(20.r),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(
-                              Icons.account_balance_wallet_outlined,
-                              size: 16.sp,
-                              color: AppColors.primaryColor,
-                            ),
-                            SizedBox(width: 6.w),
-                            Flexible(
-                              child: Obx(
-                                () => Text(
-                                  controller.profile.value.walletBalance,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w700,
-                                    color: AppColors.textColor,
-                                  ),
-                                ),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 12.w, vertical: 10.h),
+                      decoration: BoxDecoration(
+                        color: AppColors.lightPurple,
+                        borderRadius: BorderRadius.circular(20.r),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.account_balance_wallet_outlined,
+                            size: 16.sp,
+                            color: AppColors.primaryColor,
+                          ),
+                          SizedBox(width: 6.w),
+                          Obx(
+                            () => Text(
+                              controller.profile.value.walletBalance,
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w700,
+                                color: AppColors.textColor,
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
@@ -199,31 +193,27 @@ class ProfileScreen extends StatelessWidget {
                                 ),
                               ),
                               SizedBox(width: 14.w),
-                              Expanded(
-                                child: Obx(
-                                  () => Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        controller.profile.value.displayName,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                          fontSize: 17.sp,
-                                          fontWeight: FontWeight.w700,
-                                          color: AppColors.textColor,
-                                        ),
+                              Obx(
+                                () => Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      controller.profile.value.displayName,
+                                      style: TextStyle(
+                                        fontSize: 17.sp,
+                                        fontWeight: FontWeight.w700,
+                                        color: AppColors.textColor,
                                       ),
-                                      SizedBox(height: 3.h),
-                                      Text(
-                                        controller.profile.value.subTitle,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                          fontSize: 13.sp,
-                                          color: AppColors.subTextColor,
-                                        ),
+                                    ),
+                                    SizedBox(height: 3.h),
+                                    Text(
+                                      controller.profile.value.subTitle,
+                                      style: TextStyle(
+                                        fontSize: 13.sp,
+                                        color: AppColors.subTextColor,
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
@@ -239,16 +229,13 @@ class ProfileScreen extends StatelessWidget {
                                 color: Colors.green,
                               ),
                               SizedBox(width: 10.w),
-                              Expanded(
-                                child: Obx(
-                                  () => Text(
-                                    controller.profile.value.anonymityNote,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                      fontSize: 13.sp,
-                                      color: AppColors.subTextColor,
-                                      fontWeight: FontWeight.w500,
-                                    ),
+                              Obx(
+                                () => Text(
+                                  controller.profile.value.anonymityNote,
+                                  style: TextStyle(
+                                    fontSize: 13.sp,
+                                    color: AppColors.subTextColor,
+                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
                               ),

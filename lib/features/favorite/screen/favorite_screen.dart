@@ -78,7 +78,7 @@ class FavoriteScreen extends StatelessWidget {
                   ),
                 ),
                 child: CircleAvatar(
-                  radius: 34.r,
+                  radius: 28.r,
                   backgroundImage: NetworkImage(ally.image),
                   backgroundColor: AppColors.lightPurple,
                 ),
