@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:google_fonts/google_fonts.dart' show GoogleFonts;
-import 'package:pavann27/core/common/constants/appcolor.dart';
+import 'package:pavann27/core/common/constants/widget/app_colors.dart';
 
 TextStyle getTextStyle({
   double fontSize = 14.0,
   FontWeight fontWeight = FontWeight.w400,
   TextAlign textAlign = TextAlign.center,
-  Color color = Appcolor.primaryColor,
+  Color color = AppColors.primaryColor,
 }) {
   return GoogleFonts.poppins(
     fontSize: sp(fontSize),
@@ -21,7 +20,7 @@ TextStyle getBodyTextStyle({
   double fontSize = 14.0,
   FontWeight fontWeight = FontWeight.w400,
   TextAlign textAlign = TextAlign.center,
-  Color color = Appcolor.appTextColor,
+  Color color = AppColors.appTextColor,
 }) {
   return GoogleFonts.poppins(
     fontSize: sp(fontSize),

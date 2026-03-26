@@ -4,7 +4,16 @@ import 'package:pavann27/features/home/model/home_page_model.dart';
 
 
 class HomePageController extends GetxController {
+  final RxList<String> selectedAllies = <String>[].obs;
   final TextEditingController searchController = TextEditingController();
+
+  void toggleAllySelection(String name) {
+    if (selectedAllies.contains(name)) {
+      selectedAllies.remove(name);
+    } else {
+      selectedAllies.add(name);
+    }
+  }
 
   final RxList<HomePageModel> allAllies = <HomePageModel>[
     HomePageModel(
@@ -14,7 +23,7 @@ class HomePageController extends GetxController {
       rating: 4.8,
       reviews: 9,
       hours: 410,
-      bio: 'I went through a confusing phase in college and learned how to manage emotions better.',
+      bio: "Hey, I'm around if you feel like talking.",
       status: 'Online now',
       isOnline: true,
       isVerified: true,
