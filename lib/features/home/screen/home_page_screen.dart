@@ -99,28 +99,34 @@ class HomePageScreen extends StatelessWidget {
           ),
         ),
         SizedBox(width: 16.w),
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 12.h),
-          decoration: BoxDecoration(
-            color: AppColors.lightPurple,
-            borderRadius: BorderRadius.circular(18.r),
-          ),
-          child: Row(
-            children: [
-              Icon(
-                Icons.account_balance_wallet_outlined,
-                size: 18.sp,
-                color: AppColors.primaryColor,
-              ),
-              SizedBox(width: 8.w),
-              Text(
-                '₹45',
-                style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  color: AppColors.textColor,
+        Flexible(
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 12.h),
+            decoration: BoxDecoration(
+              color: AppColors.lightPurple,
+              borderRadius: BorderRadius.circular(18.r),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.account_balance_wallet_outlined,
+                  size: 18.sp,
+                  color: AppColors.primaryColor,
                 ),
-              ),
-            ],
+                SizedBox(width: 8.w),
+                Flexible(
+                  child: Text(
+                    '₹45',
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.textColor,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ],

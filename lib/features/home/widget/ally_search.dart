@@ -243,14 +243,18 @@ class _AllySearchScreenState extends State<AllySearchScreen> {
               children: [
                 Row(
                   children: [
-                    Text(
-                      ally.name,
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.textColor,
+                    Flexible(
+                      child: Text(
+                        ally.name,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.textColor,
+                        ),
                       ),
                     ),
+                
                     SizedBox(width: 8.w),
                     Icon(Icons.star_rounded,
                         color: const Color(0xFFFFC107), size: 16.sp),
