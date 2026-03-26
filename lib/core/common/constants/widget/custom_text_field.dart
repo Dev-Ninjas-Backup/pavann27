@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pavann27/core/common/constants/appcolor.dart';
+import 'package:pavann27/core/common/constants/widget/app_colors.dart';
 import 'package:pavann27/core/common/style/global_text_style.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -30,13 +30,13 @@ class CustomTextField extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(lebelText, style: getTextStyle(color: Appcolor.appTextColor,fontSize: sp(14),fontWeight: FontWeight.w500)),
+          Text(lebelText, style: getTextStyle(color: AppColors.appTextColor,fontSize: sp(14),fontWeight: FontWeight.w500)),
 
           Container(
             margin: EdgeInsets.symmetric(vertical: 8.h),
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             decoration: BoxDecoration(
-              color: Appcolor.appSecondaryColor,
+              color: AppColors.appSecondaryColor,
               borderRadius: BorderRadius.circular(12.r),
 
              // border: Border.all(color: Appcolor.appBodyColor),

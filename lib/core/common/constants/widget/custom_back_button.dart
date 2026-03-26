@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pavann27/core/common/constants/appcolor.dart';
-
+import 'package:pavann27/core/common/constants/widget/app_colors.dart';
 class CustomBackButton extends StatelessWidget {
   final Color? backgroundColor;
   final Color? iconColor;
@@ -12,7 +11,7 @@ class CustomBackButton extends StatelessWidget {
   const CustomBackButton({
     super.key,
     this.backgroundColor = Colors.white,
-    this.iconColor = Appcolor.primaryColor,
+    this.iconColor = AppColors.primaryColor,
     this.size = 32,
     this.iconSize = 20,
     this.onTap,
