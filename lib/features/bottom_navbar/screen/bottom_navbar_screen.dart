@@ -5,6 +5,7 @@ import 'package:pavann27/features/Favorite/screen/favorite_screen.dart';
 import 'package:pavann27/features/bottom_navbar/controller/bottom_navbar_controller.dart';
 import 'package:pavann27/features/home/screen/home_page_screen.dart';
 import 'package:pavann27/core/common/constants/widget/app_colors.dart';
+import 'package:pavann27/features/message/screen/message_screen.dart';
 import 'package:pavann27/features/profile/screen/profile_screen.dart';
 
 class BottomNavbarScreen extends StatelessWidget {
@@ -15,7 +16,7 @@ class BottomNavbarScreen extends StatelessWidget {
   final List<Widget> _screens = [
     HomePageScreen(),
     FavoriteScreen(),
-    const Center(child: Text('Message Screen')),
+    MessageScreen(),
     ProfileScreen(),
   ];
 
