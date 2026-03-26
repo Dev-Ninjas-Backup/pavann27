@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:pavann27/features/Favorite/screen/favorite_screen.dart';
 import 'package:pavann27/features/bottom_navbar/controller/bottom_navbar_controller.dart';
 import 'package:pavann27/features/home/screen/home_page_screen.dart';
 import 'package:pavann27/core/common/constants/widget/app_colors.dart';
+import 'package:pavann27/features/profile/screen/profile_screen.dart';
 
 class BottomNavbarScreen extends StatelessWidget {
   BottomNavbarScreen({super.key});
@@ -12,9 +14,9 @@ class BottomNavbarScreen extends StatelessWidget {
 
   final List<Widget> _screens = [
     HomePageScreen(),
-    const Center(child: Text('Favorite Screen')),
+    FavoriteScreen(),
     const Center(child: Text('Message Screen')),
-    const Center(child: Text('Profile Screen')),
+    ProfileScreen(),
   ];
 
   @override
