@@ -5,8 +5,11 @@ import 'package:get/get.dart';
 import 'package:pavann27/features/home/controller/home_page_controller.dart';
 import 'package:pavann27/core/common/constants/widget/app_colors.dart';
 import 'package:pavann27/features/home/widget/ally_card.dart';
+import 'package:pavann27/features/chat/screen/chat_screen.dart';
 import 'package:pavann27/features/home/widget/connecting_dialog.dart';
 import 'package:pavann27/features/home/widget/filterButtomSheet.dart';
+import 'package:pavann27/features/notification/screen/notification_screen.dart';
+import 'package:pavann27/features/story/screen/story_screen.dart';
 
 class HomePageScreen extends StatelessWidget {
   HomePageScreen({super.key});
@@ -52,10 +55,11 @@ class HomePageScreen extends StatelessWidget {
                       ally: ally,
                       isHighlighted: controller.selectedAllies.contains(ally.name),
                       controller: controller,
-                      onCardTap: () {
-                        log('Tapped on ally: ${ally.name}');
-                        controller.toggleAllySelection(ally.name);
-                      },
+                      onCardTap: () => Get.to(() => ChatScreen(), arguments: {
+                        'name': ally.name,
+                        'image': ally.image,
+                        'isVerified': ally.isVerified,
+                      }),
                       onTalkTap: () => Get.dialog(
                         ConnectingDialog(ally: ally),
                         barrierDismissible: true,
@@ -87,15 +91,19 @@ class HomePageScreen extends StatelessWidget {
           ),
         ),
         const Spacer(),
-        Container(
-          height: 38.w,
-          decoration: const BoxDecoration(
-            color: AppColors.lightPurple,
-            shape: BoxShape.circle,
-          ),
-          child: const Icon(
-            Icons.notifications_none_rounded,
-            color: AppColors.primaryColor,
+        GestureDetector(
+          onTap: () => Get.to(() => NotificationScreen()),
+          child: Container(
+            height: 38.w,
+            width: 38.w,
+            decoration: const BoxDecoration(
+              color: AppColors.lightPurple,
+              shape: BoxShape.circle,
+            ),
+            child: Icon(
+              Icons.notifications_none_rounded,
+              color: AppColors.primaryColor,
+            ),
           ),
         ),
         SizedBox(width: 16.w),
@@ -139,29 +147,36 @@ class HomePageScreen extends StatelessWidget {
         separatorBuilder: (_, __) => SizedBox(width: 22.w),
         itemBuilder: (context, index) {
           final item = controller.topAllies[index];
-          return Column(
-            children: [
-              Container(
-                padding: EdgeInsets.all(2.5.w),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: AppColors.primaryColor, width: 2),
+          return GestureDetector(
+            onTap: () => Get.to(() => StoryScreen(), arguments: {
+              'id': item['id'] ?? index.toString(),
+              'name': item['name'],
+              'image': item['image'],
+            }),
+            child: Column(
+              children: [
+                Container(
+                  padding: EdgeInsets.all(2.5.w),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: AppColors.primaryColor, width: 2),
+                  ),
+                  child: CircleAvatar(
+                    radius: 28.r,
+                    backgroundImage: NetworkImage(item['image']!),
+                  ),
                 ),
-                child: CircleAvatar(
-                  radius: 28.r,
-                  backgroundImage: NetworkImage(item['image']!),
+                SizedBox(height: 8.h),
+                Text(
+                  item['name']!,
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    color: AppColors.textColor,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
-              ),
-              SizedBox(height: 8.h),
-              Text(
-                item['name']!,
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  color: AppColors.textColor,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
+              ],
+            ),
           );
         },
       ),
@@ -198,34 +213,41 @@ class HomePageScreen extends StatelessWidget {
 
               return Transform.translate(
                 offset: Offset(index == 0 ? 0 : -12.w * index, 0),
-                child: SizedBox(
-                  width: 58.h,
-                  child: Stack(
-                    clipBehavior: Clip.none,
-                    children: [
-                      CircleAvatar(
-                        radius: 26.r,
-                        backgroundColor: Colors.white,
-                        child: CircleAvatar(
-                          radius: 24.r,
-                          backgroundImage:
-                              NetworkImage(controller.recentImages[index]),
-                        ),
-                      ),
-                      Positioned(
-                        bottom: 2.h,
-                        right: 2.w,
-                        child: Container(
-                          height: 14.w,
-                          width: 14.w,
-                          decoration: BoxDecoration(
-                            color: dotColor,
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.white, width: 2),
+                child: GestureDetector(
+                  onTap: () => Get.to(() => ChatScreen(), arguments: {
+                    'name': 'Recent Ally',
+                    'image': controller.recentImages[index],
+                    'isVerified': false,
+                  }),
+                  child: SizedBox(
+                    width: 58.h,
+                    child: Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        CircleAvatar(
+                          radius: 26.r,
+                          backgroundColor: Colors.white,
+                          child: CircleAvatar(
+                            radius: 24.r,
+                            backgroundImage:
+                                NetworkImage(controller.recentImages[index]),
                           ),
                         ),
-                      ),
-                    ],
+                        Positioned(
+                          bottom: 2.h,
+                          right: 2.w,
+                          child: Container(
+                            height: 14.w,
+                            width: 14.w,
+                            decoration: BoxDecoration(
+                              color: dotColor,
+                              shape: BoxShape.circle,
+                              border: Border.all(color: Colors.white, width: 2),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               );
