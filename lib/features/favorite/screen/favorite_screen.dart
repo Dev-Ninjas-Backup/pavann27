@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:pavann27/core/common/constants/widget/app_colors.dart';
 import 'package:pavann27/features/favorite/controller/favorite_controller.dart';
 import 'package:pavann27/features/favorite/model/favorite_model.dart';
+import 'package:pavann27/features/chat/screen/chat_screen.dart';
+import 'package:pavann27/features/notification/screen/notification_screen.dart';
 
 class FavoriteScreen extends StatelessWidget {
   FavoriteScreen({super.key});
@@ -55,49 +57,55 @@ class FavoriteScreen extends StatelessWidget {
     final bool canTalk = ally.status == FavoriteStatus.online;
     final bool hasSession = ally.latestSessionType != null;
 
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.fromLTRB(16.w, 16.h, 16.w, 16.h),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20.r),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // ── Avatar with ring + status dot ──────────────────────────────────
-          Stack(
-            children: [
-              Container(
-                padding: EdgeInsets.all(2.5.w),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: canTalk ? AppColors.primaryColor : Colors.grey[300]!,
-                    width: 2,
-                  ),
-                ),
-                child: CircleAvatar(
-                  radius: 28.r,
-                  backgroundImage: NetworkImage(ally.image),
-                  backgroundColor: AppColors.lightPurple,
-                ),
-              ),
-              Positioned(
-                bottom: 2.h,
-                right: 2.w,
-                child: Container(
-                  width: 14.w,
-                  height: 14.w,
+    return GestureDetector(
+      onTap: () => Get.to(() => ChatScreen(), arguments: {
+        'name': ally.name,
+        'image': ally.image,
+        'isVerified': ally.isVerified,
+      }),
+      child: Container(
+        width: double.infinity,
+        padding: EdgeInsets.fromLTRB(16.w, 16.h, 16.w, 16.h),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20.r),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // ── Avatar with ring + status dot ──────────────────────────────────
+            Stack(
+              children: [
+                Container(
+                  padding: EdgeInsets.all(2.5.w),
                   decoration: BoxDecoration(
-                    color: _dotColor(ally.status),
                     shape: BoxShape.circle,
-                    border: Border.all(color: Colors.white, width: 2),
+                    border: Border.all(
+                      color: canTalk ? AppColors.primaryColor : Colors.grey[300]!,
+                      width: 2,
+                    ),
+                  ),
+                  child: CircleAvatar(
+                    radius: 28.r,
+                    backgroundImage: NetworkImage(ally.image),
+                    backgroundColor: AppColors.lightPurple,
                   ),
                 ),
-              ),
-            ],
-          ),
+                Positioned(
+                  bottom: 2.h,
+                  right: 2.w,
+                  child: Container(
+                    width: 14.w,
+                    height: 14.w,
+                    decoration: BoxDecoration(
+                      color: _dotColor(ally.status),
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.white, width: 2),
+                    ),
+                  ),
+                ),
+              ],
+            ),
 
           SizedBox(width: 14.w),
 
@@ -316,7 +324,8 @@ class FavoriteScreen extends StatelessWidget {
           ),
         ],
       ),
-    );
+      ),
+    );  
   }
 
   @override
@@ -341,17 +350,20 @@ class FavoriteScreen extends StatelessWidget {
                     ),
                   ),
                   const Spacer(),
-                  Container(
-                    width: 40.w,
-                    height: 40.w,
-                    decoration: const BoxDecoration(
-                      color: AppColors.lightPurple,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Icon(
-                      Icons.notifications_none_rounded,
-                      color: AppColors.primaryColor,
-                      size: 20.sp,
+                  GestureDetector(
+                    onTap: () => Get.to(() => NotificationScreen()),
+                    child: Container(
+                      width: 40.w,
+                      height: 40.w,
+                      decoration: const BoxDecoration(
+                        color: AppColors.lightPurple,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        Icons.notifications_none_rounded,
+                        color: AppColors.primaryColor,
+                        size: 20.sp,
+                      ),
                     ),
                   ),
                   SizedBox(width: 10.w),

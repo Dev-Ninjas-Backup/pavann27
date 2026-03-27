@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:pavann27/core/common/constants/widget/app_colors.dart';
 import 'package:pavann27/features/message/controller/message_controller.dart';
 import 'package:pavann27/features/message/model/message_model.dart';
+import 'package:pavann27/features/notification/screen/notification_screen.dart';
 
 class MessageScreen extends StatelessWidget {
   MessageScreen({super.key});
@@ -164,17 +165,20 @@ class MessageScreen extends StatelessWidget {
                   ),
                   const Spacer(),
                   // Bell
-                  Container(
-                    width: 40.w,
-                    height: 40.w,
-                    decoration: const BoxDecoration(
-                      color: AppColors.lightPurple,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Icon(
-                      Icons.notifications_none_rounded,
-                      color: AppColors.primaryColor,
-                      size: 20.sp,
+                  GestureDetector(
+                    onTap: () => Get.to(() => NotificationScreen()),
+                    child: Container(
+                      width: 40.w,
+                      height: 40.w,
+                      decoration: const BoxDecoration(
+                        color: AppColors.lightPurple,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        Icons.notifications_none_rounded,
+                        color: AppColors.primaryColor,
+                        size: 20.sp,
+                      ),
                     ),
                   ),
                   SizedBox(width: 10.w),
