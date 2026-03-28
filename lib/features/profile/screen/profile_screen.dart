@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:pavann27/core/common/constants/widget/app_colors.dart';
 import 'package:pavann27/features/profile/controller/profile_controller.dart';
 import 'package:pavann27/features/notification/screen/notification_screen.dart';
+import 'package:pavann27/features/topup/screen/topup_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
@@ -107,32 +108,35 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     SizedBox(width: 10.w),
                     // Wallet
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 12.w, vertical: 10.h),
-                      decoration: BoxDecoration(
-                        color: AppColors.lightPurple,
-                        borderRadius: BorderRadius.circular(20.r),
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.account_balance_wallet_outlined,
-                            size: 16.sp,
-                            color: AppColors.primaryColor,
-                          ),
-                          SizedBox(width: 6.w),
-                          Obx(
-                            () => Text(
-                              controller.profile.value.walletBalance,
-                              style: TextStyle(
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w700,
-                                color: AppColors.textColor,
+                    GestureDetector(
+                      onTap: () => Get.to(() => TopupScreen()),
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 12.w, vertical: 10.h),
+                        decoration: BoxDecoration(
+                          color: AppColors.lightPurple,
+                          borderRadius: BorderRadius.circular(20.r),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.account_balance_wallet_outlined,
+                              size: 16.sp,
+                              color: AppColors.primaryColor,
+                            ),
+                            SizedBox(width: 6.w),
+                            Obx(
+                              () => Text(
+                                controller.profile.value.walletBalance,
+                                style: TextStyle(
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w700,
+                                  color: AppColors.textColor,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ],

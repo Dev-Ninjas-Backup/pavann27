@@ -3,8 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pavann27/core/common/constants/widget/app_colors.dart';
 import 'package:pavann27/features/message/controller/message_controller.dart';
+import 'package:pavann27/features/chat/screen/chat_screen.dart';
 import 'package:pavann27/features/message/model/message_model.dart';
 import 'package:pavann27/features/notification/screen/notification_screen.dart';
+import 'package:pavann27/features/topup/screen/topup_screen.dart';
 
 class MessageScreen extends StatelessWidget {
   MessageScreen({super.key});
@@ -16,7 +18,12 @@ class MessageScreen extends StatelessWidget {
     final bool isMissedCall = msg.lastMessage.toLowerCase() == 'missed call';
 
     return InkWell(
-      onTap: () => ctrl.openConversation(msg),
+      onTap: () => Get.to(() => ChatScreen(), arguments: {
+        'id': msg.id,
+        'name': msg.name,
+        'image': msg.image,
+        'isVerified': msg.isVerified,
+      }),
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 14.h),
         child: Row(
@@ -183,30 +190,33 @@ class MessageScreen extends StatelessWidget {
                   ),
                   SizedBox(width: 10.w),
                   // Wallet
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: 12.w, vertical: 10.h),
-                    decoration: BoxDecoration(
-                      color: AppColors.lightPurple,
-                      borderRadius: BorderRadius.circular(20.r),
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.account_balance_wallet_outlined,
-                          size: 16.sp,
-                          color: AppColors.primaryColor,
-                        ),
-                        SizedBox(width: 6.w),
-                        Text(
-                          '₹45',
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w700,
-                            color: AppColors.textColor,
+                  GestureDetector(
+                    onTap: () => Get.to(() => TopupScreen()),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 12.w, vertical: 10.h),
+                      decoration: BoxDecoration(
+                        color: AppColors.lightPurple,
+                        borderRadius: BorderRadius.circular(20.r),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.account_balance_wallet_outlined,
+                            size: 16.sp,
+                            color: AppColors.primaryColor,
                           ),
-                        ),
-                      ],
+                          SizedBox(width: 6.w),
+                          Text(
+                            '₹45',
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w700,
+                              color: AppColors.textColor,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
