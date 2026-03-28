@@ -6,6 +6,7 @@ import 'package:pavann27/features/favorite/controller/favorite_controller.dart';
 import 'package:pavann27/features/favorite/model/favorite_model.dart';
 import 'package:pavann27/features/chat/screen/chat_screen.dart';
 import 'package:pavann27/features/notification/screen/notification_screen.dart';
+import 'package:pavann27/features/topup/screen/topup_screen.dart';
 
 class FavoriteScreen extends StatelessWidget {
   FavoriteScreen({super.key});
@@ -59,6 +60,7 @@ class FavoriteScreen extends StatelessWidget {
 
     return GestureDetector(
       onTap: () => Get.to(() => ChatScreen(), arguments: {
+        'id': ally.id,
         'name': ally.name,
         'image': ally.image,
         'isVerified': ally.isVerified,
@@ -367,30 +369,33 @@ class FavoriteScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: 10.w),
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: 12.w, vertical: 10.h),
-                    decoration: BoxDecoration(
-                      color: AppColors.lightPurple,
-                      borderRadius: BorderRadius.circular(20.r),
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.account_balance_wallet_outlined,
-                          size: 16.sp,
-                          color: AppColors.primaryColor,
-                        ),
-                        SizedBox(width: 6.w),
-                        Text(
-                          '₹45',
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w700,
-                            color: AppColors.textColor,
+                  GestureDetector(
+                    onTap: () => Get.to(() => TopupScreen()),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 12.w, vertical: 10.h),
+                      decoration: BoxDecoration(
+                        color: AppColors.lightPurple,
+                        borderRadius: BorderRadius.circular(20.r),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.account_balance_wallet_outlined,
+                            size: 16.sp,
+                            color: AppColors.primaryColor,
                           ),
-                        ),
-                      ],
+                          SizedBox(width: 6.w),
+                          Text(
+                            '₹45',
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w700,
+                              color: AppColors.textColor,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],

@@ -215,7 +215,7 @@ class ChatScreen extends StatelessWidget {
                   width: 50,
                   height: 50,
                   decoration: BoxDecoration(
-                    color: Colors.deepPurple,
+                    color: const Color(0xFF6C30ED),
                     borderRadius: BorderRadius.circular(25),
                   ),
                   child: const Icon(
@@ -246,7 +246,7 @@ class ChatScreen extends StatelessWidget {
             shape: BoxShape.circle,
             border: Border.all(color: Colors.grey.shade300),
           ),
-          child: Icon(icon, color: Colors.deepPurple, size: 28),
+          child: Icon(icon, color: const Color(0xFF6C30ED), size: 28),
         ),
         const SizedBox(height: 8),
         Text(
