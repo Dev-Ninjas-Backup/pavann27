@@ -10,6 +10,7 @@ import 'package:pavann27/features/home/widget/connecting_dialog.dart';
 import 'package:pavann27/features/home/widget/filterButtomSheet.dart';
 import 'package:pavann27/features/notification/screen/notification_screen.dart';
 import 'package:pavann27/features/story/screen/story_screen.dart';
+import 'package:pavann27/features/topup/screen/topup_screen.dart';
 
 class HomePageScreen extends StatelessWidget {
   HomePageScreen({super.key});
@@ -56,6 +57,7 @@ class HomePageScreen extends StatelessWidget {
                       isHighlighted: controller.selectedAllies.contains(ally.name),
                       controller: controller,
                       onCardTap: () => Get.to(() => ChatScreen(), arguments: {
+                        'id': ally.name, // Using name as ID if ID is missing in model
                         'name': ally.name,
                         'image': ally.image,
                         'isVerified': ally.isVerified,
@@ -107,28 +109,31 @@ class HomePageScreen extends StatelessWidget {
           ),
         ),
         SizedBox(width: 16.w),
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 12.h),
-          decoration: BoxDecoration(
-            color: AppColors.lightPurple,
-            borderRadius: BorderRadius.circular(18.r),
-          ),
-          child: Row(
-            children: [
-              Icon(
-                Icons.account_balance_wallet_outlined,
-                size: 18.sp,
-                color: AppColors.primaryColor,
-              ),
-              SizedBox(width: 8.w),
-              Text(
-                '₹45',
-                style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  color: AppColors.textColor,
+        GestureDetector(
+          onTap: () => Get.to(() => TopupScreen()),
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 12.h),
+            decoration: BoxDecoration(
+              color: AppColors.lightPurple,
+              borderRadius: BorderRadius.circular(18.r),
+            ),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.account_balance_wallet_outlined,
+                  size: 18.sp,
+                  color: AppColors.primaryColor,
                 ),
-              ),
-            ],
+                SizedBox(width: 8.w),
+                Text(
+                  '₹45',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.textColor,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ],
@@ -215,6 +220,7 @@ class HomePageScreen extends StatelessWidget {
                 offset: Offset(index == 0 ? 0 : -12.w * index, 0),
                 child: GestureDetector(
                   onTap: () => Get.to(() => ChatScreen(), arguments: {
+                    'id': index.toString(),
                     'name': 'Recent Ally',
                     'image': controller.recentImages[index],
                     'isVerified': false,

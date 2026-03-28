@@ -17,7 +17,7 @@ class ChatController extends GetxController {
     super.onInit();
     if (Get.arguments != null) {
       user.value = ChatUser(
-        id: user.value.id,
+        id: Get.arguments['id'] ?? user.value.id,
         name: Get.arguments['name'] ?? user.value.name,
         profileImageUrl: Get.arguments['image'] ?? user.value.profileImageUrl,
         bio: user.value.bio,
