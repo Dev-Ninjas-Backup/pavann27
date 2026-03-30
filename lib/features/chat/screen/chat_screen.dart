@@ -274,14 +274,6 @@ class ChatScreen extends StatelessWidget {
           ),
         ],
       ),
-          child: Icon(icon, color: const Color(0xFF6C30ED), size: 28),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          label,
-          style: const TextStyle(fontSize: 13, color: Colors.black87),
-        ),
-      ],
     );
   }
 }
