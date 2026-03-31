@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:get/get.dart';
+import 'package:pavann27/core/common/constants/iconpath.dart';
 import 'package:pavann27/features/call/model/call_model.dart';
 
 class CallController extends GetxController {
@@ -7,7 +8,7 @@ class CallController extends GetxController {
   final Rx<CallModel> call = CallModel(
     id: 'c1',
     allyName: 'Amyra',
-    allyImage: 'https://randomuser.me/api/portraits/women/12.jpg',
+    allyImage: Iconpath.profileWoman1,
     type: CallType.chat,
     state: CallState.connecting,
     elapsedSeconds: 0,

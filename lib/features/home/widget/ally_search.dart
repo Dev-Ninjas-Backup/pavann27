@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pavann27/core/common/constants/widget/app_colors.dart';
+import 'package:pavann27/core/common/constants/iconpath.dart';
 import 'package:pavann27/features/home/model/ally_search_model.dart'; // Import the new model file
 
 
@@ -31,28 +32,28 @@ class _AllySearchScreenState extends State<AllySearchScreen> {
       name: 'Kavya',
       rating: 4.9,
       languages: ['English', 'Hindi', 'Kannada'],
-      image: 'https://randomuser.me/api/portraits/women/44.jpg',
+      image: Iconpath.profileWoman3,
       status: AllyStatus.online,
     ),
     AllySearchModel(
       name: 'Meera',
       rating: 4.9,
       languages: ['English', 'Hindi', 'Kannada'],
-      image: 'https://randomuser.me/api/portraits/women/65.jpg',
+      image: Iconpath.profileWoman4,
       status: AllyStatus.busy,
     ),
     AllySearchModel(
       name: 'Sara',
       rating: 4.9,
       languages: ['English', 'Hindi', 'Kannada'],
-      image: 'https://randomuser.me/api/portraits/women/32.jpg',
+      image: Iconpath.profileWoman2,
       status: AllyStatus.offline,
     ),
     AllySearchModel(
       name: 'Nisha',
       rating: 4.9,
       languages: ['English', 'Hindi', 'Kannada'],
-      image: 'https://randomuser.me/api/portraits/women/12.jpg',
+      image: Iconpath.profileWoman1,
       status: AllyStatus.busy,
     ),
   ];
@@ -232,7 +233,9 @@ class _AllySearchScreenState extends State<AllySearchScreen> {
         children: [
           CircleAvatar(
             radius: 28.r,
-            backgroundImage: NetworkImage(ally.image),
+            backgroundImage: (ally.image.startsWith('http')
+                ? NetworkImage(ally.image)
+                : AssetImage(ally.image)) as ImageProvider,
             backgroundColor: AppColors.lightPurple,
           ),
           SizedBox(width: 14.w),

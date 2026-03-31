@@ -168,7 +168,9 @@ class HomePageScreen extends StatelessWidget {
                   ),
                   child: CircleAvatar(
                     radius: 28.r,
-                    backgroundImage: NetworkImage(item['image']!),
+                    backgroundImage: (item['image']!.startsWith('http')
+                        ? NetworkImage(item['image']!)
+                        : AssetImage(item['image']!)) as ImageProvider,
                   ),
                 ),
                 SizedBox(height: 8.h),
@@ -235,8 +237,9 @@ class HomePageScreen extends StatelessWidget {
                           backgroundColor: Colors.white,
                           child: CircleAvatar(
                             radius: 24.r,
-                            backgroundImage:
-                                NetworkImage(controller.recentImages[index]),
+                            backgroundImage: (controller.recentImages[index].startsWith('http')
+                                ? NetworkImage(controller.recentImages[index])
+                                : AssetImage(controller.recentImages[index])) as ImageProvider,
                           ),
                         ),
                         Positioned(

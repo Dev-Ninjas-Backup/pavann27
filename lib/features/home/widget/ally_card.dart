@@ -67,7 +67,9 @@ class AllyCard extends StatelessWidget {
                   ),
                   child: CircleAvatar(
                     radius: 24.r,
-                    backgroundImage: NetworkImage(ally.image),
+                    backgroundImage: ally.image.startsWith('http')
+                        ? NetworkImage(ally.image)
+                        : AssetImage(ally.image) as ImageProvider,
                   ),
                 ),
                 Positioned(

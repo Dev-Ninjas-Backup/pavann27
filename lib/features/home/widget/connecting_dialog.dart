@@ -40,7 +40,9 @@ class ConnectingDialog extends StatelessWidget {
                         ),
                         child: CircleAvatar(
                           radius: 22.r,
-                          backgroundImage: NetworkImage(ally.image),
+                          backgroundImage: (ally.image.startsWith('http')
+                              ? NetworkImage(ally.image)
+                              : AssetImage(ally.image)) as ImageProvider,
                         ),
                       ),
                       Positioned(
