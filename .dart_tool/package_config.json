@@ -3,7 +3,7 @@
   "packages": [
     {
       "name": "async",
-      "rootUri": "file:///Users/AVIJIT/.pub-cache/hosted/pub.dev/async-2.13.0",
+      "rootUri": "file:///Users/AVIJIT/.pub-cache/hosted/pub.dev/async-2.13.1",
       "packageUri": "lib/",
       "languageVersion": "3.4"
     },
@@ -45,9 +45,9 @@
     },
     {
       "name": "cupertino_icons",
-      "rootUri": "file:///Users/AVIJIT/.pub-cache/hosted/pub.dev/cupertino_icons-1.0.8",
+      "rootUri": "file:///Users/AVIJIT/.pub-cache/hosted/pub.dev/cupertino_icons-1.0.9",
       "packageUri": "lib/",
-      "languageVersion": "3.1"
+      "languageVersion": "3.9"
     },
     {
       "name": "fake_async",
@@ -141,7 +141,7 @@
     },
     {
       "name": "google_fonts",
-      "rootUri": "file:///Users/AVIJIT/.pub-cache/hosted/pub.dev/google_fonts-8.0.2",
+      "rootUri": "file:///Users/AVIJIT/.pub-cache/hosted/pub.dev/google_fonts-6.3.3",
       "packageUri": "lib/",
       "languageVersion": "3.9"
     },
@@ -237,7 +237,7 @@
     },
     {
       "name": "path_provider_android",
-      "rootUri": "file:///Users/AVIJIT/.pub-cache/hosted/pub.dev/path_provider_android-2.2.22",
+      "rootUri": "file:///Users/AVIJIT/.pub-cache/hosted/pub.dev/path_provider_android-2.2.23",
       "packageUri": "lib/",
       "languageVersion": "3.9"
     },
@@ -285,13 +285,13 @@
     },
     {
       "name": "shared_preferences",
-      "rootUri": "file:///Users/AVIJIT/.pub-cache/hosted/pub.dev/shared_preferences-2.5.4",
+      "rootUri": "file:///Users/AVIJIT/.pub-cache/hosted/pub.dev/shared_preferences-2.5.5",
       "packageUri": "lib/",
       "languageVersion": "3.9"
     },
     {
       "name": "shared_preferences_android",
-      "rootUri": "file:///Users/AVIJIT/.pub-cache/hosted/pub.dev/shared_preferences_android-2.4.21",
+      "rootUri": "file:///Users/AVIJIT/.pub-cache/hosted/pub.dev/shared_preferences_android-2.4.23",
       "packageUri": "lib/",
       "languageVersion": "3.9"
     },
@@ -309,9 +309,9 @@
     },
     {
       "name": "shared_preferences_platform_interface",
-      "rootUri": "file:///Users/AVIJIT/.pub-cache/hosted/pub.dev/shared_preferences_platform_interface-2.4.1",
+      "rootUri": "file:///Users/AVIJIT/.pub-cache/hosted/pub.dev/shared_preferences_platform_interface-2.4.2",
       "packageUri": "lib/",
-      "languageVersion": "3.2"
+      "languageVersion": "3.9"
     },
     {
       "name": "shared_preferences_web",

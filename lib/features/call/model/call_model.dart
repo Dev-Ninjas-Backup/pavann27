@@ -1,6 +1,6 @@
 enum CallType { chat, voice, video }
 
-enum CallState { connecting, connected, ended, cancelled }
+enum CallState { ringing, connecting, connected, ended, cancelled }
 
 class CallModel {
   final String id;
@@ -15,7 +15,7 @@ class CallModel {
     required this.allyName,
     required this.allyImage,
     required this.type,
-    this.state = CallState.connecting,
+    this.state = CallState.ringing,
     this.elapsedSeconds = 0,
   });
 
