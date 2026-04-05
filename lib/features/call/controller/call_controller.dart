@@ -58,13 +58,11 @@ class CallController extends GetxController {
   void cancelCall() {
     _stopAll();
     call.value = call.value.copyWith(state: CallState.cancelled);
-    Get.back();
   }
 
   void endCall() {
     _stopAll();
     call.value = call.value.copyWith(state: CallState.ended);
-    Get.back();
   }
 
   void _stopAll() {

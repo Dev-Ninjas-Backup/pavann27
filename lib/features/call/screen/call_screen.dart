@@ -4,13 +4,13 @@ import 'package:get/get.dart';
 import 'package:pavann27/core/common/constants/widget/app_colors.dart';
 import 'package:pavann27/features/call/controller/call_controller.dart';
 import 'package:pavann27/features/call/model/call_model.dart';
+import 'package:pavann27/features/chat_started/screen/chat_started_screen.dart';
 
 class CallScreen extends StatelessWidget {
   CallScreen({super.key});
 
-  final CallController controller = Get.put(CallController());
+  final CallController controller = Get.put(CallController(), permanent: true);
 
-  // ── Session type icon ─────────────────────────────────────────────────────────
   IconData _typeIcon(CallType t) {
     switch (t) {
       case CallType.chat:
@@ -33,12 +33,10 @@ class CallScreen extends StatelessWidget {
 
           return Stack(
             children: [
-              // ── Main content ─────────────────────────────────────────────────
               Column(
                 children: [
                   SizedBox(height: 20.h),
 
-                  // ── Session timer pill ─────────────────────────────────────
                   Center(
                     child: Container(
                       padding: EdgeInsets.symmetric(
@@ -78,7 +76,6 @@ class CallScreen extends StatelessWidget {
 
                   const Spacer(),
 
-                  // ── Pulsing avatar ─────────────────────────────────────────
                   Center(
                     child: SizedBox(
                       width: 220.w,
@@ -119,8 +116,15 @@ class CallScreen extends StatelessWidget {
                           ),
                           // Avatar
                           CircleAvatar(
-                            radius: 75.r,
-                            backgroundImage: NetworkImage(call.allyImage),
+                            radius: 75.r, 
+                            backgroundImage: call.allyImage.startsWith('assets/')
+                                ? AssetImage(call.allyImage) as ImageProvider
+                                : NetworkImage(call.allyImage),
+                            onBackgroundImageError: (exception, stackTrace) {
+                              debugPrint('Warning: Could not load image at ${call.allyImage}');
+                            },
+                            // The child is shown if the backgroundImage fails to load or is null
+                            child: Icon(Icons.person, size: 50.r, color: Colors.white70),
                             backgroundColor: AppColors.lightPurple,
                           ),
                           // Online dot
@@ -145,7 +149,6 @@ class CallScreen extends StatelessWidget {
 
                   SizedBox(height: 28.h),
 
-                  // ── Name ──────────────────────────────────────────────────
                   Text(
                     call.allyName,
                     style: TextStyle(
@@ -158,12 +161,10 @@ class CallScreen extends StatelessWidget {
 
                   SizedBox(height: 10.h),
 
-                  // ── Status line ────────────────────────────────────────────
                   _StatusDots(connecting: connecting),
 
                   const Spacer(),
 
-                  // ── Bottom cancel / end panel ──────────────────────────────
                   Container(
                     margin: EdgeInsets.fromLTRB(16.w, 0, 16.w, 24.h),
                     padding: EdgeInsets.symmetric(vertical: 24.h),
@@ -172,8 +173,14 @@ class CallScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(28.r),
                     ),
                     child: connecting
-                        ? _CancelButton(onTap: controller.cancelCall)
-                        : _EndCallButton(onTap: controller.endCall),
+                        ? _CancelButton(onTap: () {
+                            controller.cancelCall();
+                            Get.off(() => ChatStartedScreen());
+                          })
+                        : _EndCallButton(onTap: () {
+                            controller.endCall();
+                            Get.off(() => ChatStartedScreen());
+                          }),
                   ),
                 ],
               ),
@@ -185,7 +192,6 @@ class CallScreen extends StatelessWidget {
   }
 }
 
-// ── Animated "Connecting..." dots ────────────────────────────────────────────
 class _StatusDots extends StatefulWidget {
   final bool connecting;
   const _StatusDots({required this.connecting});
@@ -249,7 +255,6 @@ class _StatusDotsState extends State<_StatusDots>
   }
 }
 
-// ── Cancel button ─────────────────────────────────────────────────────────────
 class _CancelButton extends StatelessWidget {
   final VoidCallback onTap;
   const _CancelButton({required this.onTap});
@@ -289,7 +294,6 @@ class _CancelButton extends StatelessWidget {
   }
 }
 
-// ── End call button (shown when connected) ────────────────────────────────────
 class _EndCallButton extends StatelessWidget {
   final VoidCallback onTap;
   const _EndCallButton({required this.onTap});
