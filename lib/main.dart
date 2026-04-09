@@ -1,41 +1,32 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:get/get.dart';
-import 'package:pavann27/features/bottom_navbar/controller/bottom_navbar_controller.dart';
-import 'package:pavann27/features/bottom_navbar/screen/bottom_navbar_screen.dart';
+import 'package:pavann27/app.dart';
 
-void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  
-  // Initialize the navigation controller so the BottomNavbarScreen can find it
-  Get.put(BottomNavbarController());
-  
-  runApp(const MyApp());
+void main() async {
+  runZonedGuarded(() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    
+
+    FlutterError.onError = (FlutterErrorDetails details) {
+      FlutterError.dumpErrorToConsole(details);
+    };
+
+    configEasyLoading();
+    runApp(const MyApp());
+  }, (error, stack) {
+    debugPrint('UNCAUGHT ERROR: $error');
+    debugPrintStack(stackTrace: stack);
+  });
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(393, 852),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (context, child) {
-        return GetMaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Pavann App',
-          theme: ThemeData(
-            scaffoldBackgroundColor: Colors.white,
-            useMaterial3: true,
-            primaryColor: const Color(0xFF7B61FF),
-          ),
-          builder: EasyLoading.init(),
-          home: BottomNavbarScreen(),
-        );
-      },
-    );
-  }
+void configEasyLoading() {
+  EasyLoading.instance
+    ..loadingStyle = EasyLoadingStyle.custom
+    ..backgroundColor = Colors.grey
+    ..textColor = Colors.white
+    ..indicatorColor = Colors.white
+    ..maskColor = Colors.green
+    ..userInteractions = false
+    ..dismissOnTap = false;
 }

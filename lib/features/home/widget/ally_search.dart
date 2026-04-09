@@ -275,6 +275,8 @@ class _AllySearchScreenState extends State<AllySearchScreen> {
                 SizedBox(height: 4.h),
                 Text(
                   ally.languages.join(', '),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: 13.sp,
                     color: AppColors.subTextColor,
@@ -352,13 +354,15 @@ class _AllySearchScreenState extends State<AllySearchScreen> {
                       ),
                     ),
                     SizedBox(width: 14.w),
-                    Text(
-                      'Find your Ally',
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w800,
-                        color: AppColors.textColor,
-                        letterSpacing: -0.3,
+                    Expanded(
+                      child: Text(
+                        'Find your Ally',
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w800,
+                          color: AppColors.textColor,
+                          letterSpacing: -0.3,
+                        ),
                       ),
                     ),
                   ],

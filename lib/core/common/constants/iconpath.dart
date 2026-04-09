@@ -10,4 +10,5 @@ class Iconpath {
   static const String profileWoman3 = 'assets/icons/woman_44.jpg';
   static const String profileWoman4 = 'assets/icons/woman_65.jpg';
   static const String profileWoman5 = 'assets/icons/woman_68.jpg';
+  static const String splashLogo = 'assets/icons/splashlogo.png';
 }

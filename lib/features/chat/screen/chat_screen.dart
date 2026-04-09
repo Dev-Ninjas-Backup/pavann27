@@ -1,5 +1,6 @@
 // chat_screen.dart
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pavann27/features/call/screen/call_model.dart';
 import 'package:pavann27/features/chat/controller/chat_controller.dart';
@@ -27,30 +28,36 @@ class ChatScreen extends StatelessWidget {
           child: Obx(() => Row(
                 children: [
                   CircleAvatar(
-                    radius: 20,
+                    radius: 20.r,
                     backgroundImage: NetworkImage(controller.user.value.profileImageUrl),
                   ),
-                  const SizedBox(width: 12),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Text(
-                            controller.user.value.name,
-                            style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                  SizedBox(width: 12.w),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Row(
+                          children: [
+                            Flexible(
+                              child: Text(
+                                controller.user.value.name,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                             ),
-                          ),
-                          if (controller.user.value.isVerified)
-                            const Padding(
-                              padding: EdgeInsets.only(left: 6),
-                              child: Icon(Icons.verified, color: Colors.blue, size: 18),
-                            ),
-                        ],
-                      ),
+                            if (controller.user.value.isVerified)
+                              Padding(
+                                padding: EdgeInsets.only(left: 4.w),
+                                child: Icon(Icons.verified, color: Colors.blue, size: 16.sp),
+                              ),
+                          ],
+                        ),
                       Row(
                         children: [
                           Container(
@@ -63,20 +70,21 @@ class ChatScreen extends StatelessWidget {
                               shape: BoxShape.circle,
                             ),
                           ),
-                          const SizedBox(width: 6),
+                          SizedBox(width: 6.w),
                           Text(
                             controller.user.value.isOnline ? "Online" : "Offline",
                             style: TextStyle(
                               color: controller.user.value.isOnline
                                   ? Colors.green
                                   : Colors.grey,
-                              fontSize: 13,
+                              fontSize: 12.sp,
                             ),
                           ),
                         ],
                       ),
                     ],
                   ),
+                ),
                 ],
               )),
         ),
@@ -115,31 +123,31 @@ class ChatScreen extends StatelessWidget {
                   GestureDetector(
                     onTap: () => Get.to(() => ViewProfileScreen()),
                     child: Obx(() => CircleAvatar(
-                          radius: 85,
+                          radius: 85.r,
                           backgroundImage: NetworkImage(controller.user.value.profileImageUrl),
                         )),
                   ),
 
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16.h),
 
                   // Name
                   Obx(() => Text(
                         controller.user.value.name,
-                        style: const TextStyle(
-                          fontSize: 24,
+                        style: TextStyle(
+                          fontSize: 24.sp,
                           fontWeight: FontWeight.bold,
                         ),
                       )),
 
-                  const SizedBox(height: 4),
+                  SizedBox(height: 4.h),
 
                   // Online Status
                   Obx(() => Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
-                            width: 9,
-                            height: 9,
+                            width: 9.w,
+                            height: 9.w,
                             decoration: BoxDecoration(
                               color: controller.user.value.isOnline
                                   ? Colors.green
@@ -147,19 +155,19 @@ class ChatScreen extends StatelessWidget {
                               shape: BoxShape.circle,
                             ),
                           ),
-                          const SizedBox(width: 8),
+                          SizedBox(width: 8.w),
                           Text(
                             controller.user.value.isOnline ? "Online now" : "Offline",
                             style: TextStyle(
                                 color: controller.user.value.isOnline
                                     ? Colors.green
                                     : Colors.grey,
-                                fontSize: 15),
+                                fontSize: 15.sp),
                           ),
                         ],
                       )),
 
-                  const SizedBox(height: 30),
+                  SizedBox(height: 30.h),
 
                   // Action Buttons
                   Row(
@@ -258,19 +266,19 @@ class ChatScreen extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            width: 55,
-            height: 55,
+            width: 55.w,
+            height: 55.w,
             decoration: BoxDecoration(
               color: Colors.white,
               shape: BoxShape.circle,
               border: Border.all(color: Colors.grey.shade300),
             ),
-            child: Icon(icon, color: const Color(0xFF6C30ED), size: 28),
+            child: Icon(icon, color: const Color(0xFF6C30ED), size: 28.sp),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8.h),
           Text(
             label,
-            style: const TextStyle(fontSize: 13, color: Colors.black87),
+            style: TextStyle(fontSize: 13.sp, color: Colors.black87),
           ),
         ],
       ),
