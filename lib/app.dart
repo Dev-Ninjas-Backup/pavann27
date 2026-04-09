@@ -1,39 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:pavann27/routes/app_routes.dart';
+import 'package:pavann27/core/binding/initial_binding.dart';
+import 'package:pavann27/core/common/constants/app_theme.dart';
 
+/// Main application widget
+/// Configures theme, routing, and global settings
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter EasyLoading',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(),
-      builder: EasyLoading.init(),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Flutter EasyLoading'),
-      ),
-      body: const Center(
-        child: Text('Flutter EasyLoading'),
-      ),
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (_, child) {
+        return GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          
+          // Routing Configuration
+          initialRoute: AppRoute.splashScreen,
+          getPages: AppRoute.routes,
+          defaultTransition: Transition.fadeIn,
+          transitionDuration: const Duration(milliseconds: 300),
+          
+          // Theme Configuration
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          themeMode: ThemeMode.system,
+          
+          // Global Builders
+          builder: EasyLoading.init(),
+          
+          // Dependency Injection
+          initialBinding: InitialBinding(),
+        );
+      },
     );
   }
 }

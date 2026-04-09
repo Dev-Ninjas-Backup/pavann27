@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:developer';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pavann27/features/home/controller/home_page_controller.dart';
@@ -22,56 +21,66 @@ class HomePageScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: EdgeInsets.fromLTRB(7.5.w, 16.h, 7.5.w, 24.h),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildTopBar(),
-              SizedBox(height: 24.h),
-              _buildStorySection(),
-              SizedBox(height: 28.h),
-              _buildRecentSection(),
-              SizedBox(height: 24.h),
-              _buildSearchBar(),
-              SizedBox(height: 28.h),
-              Text(
-                'Discover',
-                style: TextStyle(
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.w700,
-                  color: AppColors.textColor,
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              padding: EdgeInsets.fromLTRB(7.5.w, 16.h, 7.5.w, 16.h),
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: constraints.maxHeight - 32.h, // Account for SafeArea
                 ),
-              ),
-              SizedBox(height: 16.h),
-              Obx(
-                () => ListView.separated(
-                  itemCount: controller.filteredAllies.length,
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  separatorBuilder: (_, __) => SizedBox(height: 18.h),
-                  itemBuilder: (context, index) {
-                    final ally = controller.filteredAllies[index];
-                    return AllyCard(
-                      ally: ally,
-                      isHighlighted: controller.selectedAllies.contains(ally.name),
-                      controller: controller,
-                      onCardTap: () => Get.to(() => ChatScreen(), arguments: {
-                        'id': ally.name, // Using name as ID if ID is missing in model
-                        'name': ally.name,
-                        'image': ally.image,
-                        'isVerified': ally.isVerified,
-                      }),
-                      onTalkTap: () => Get.dialog(
-                        ConnectingDialog(ally: ally),
-                        barrierDismissible: true,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildTopBar(),
+                    SizedBox(height: 24.h),
+                    _buildStorySection(),
+                    SizedBox(height: 28.h),
+                    _buildRecentSection(),
+                    SizedBox(height: 24.h),
+                    _buildSearchBar(),
+                    SizedBox(height: 28.h),
+                    Text(
+                      'Discover',
+                      style: TextStyle(
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.textColor,
                       ),
-                    );
-                  },
+                    ),
+                    SizedBox(height: 16.h),
+                    Obx(
+                      () => ListView.separated(
+                        itemCount: controller.filteredAllies.length,
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        separatorBuilder: (_, __) => SizedBox(height: 18.h),
+                        itemBuilder: (context, index) {
+                          final ally = controller.filteredAllies[index];
+                          return AllyCard(
+                            ally: ally,
+                            isHighlighted: controller.selectedAllies.contains(ally.name),
+                            controller: controller,
+                            onCardTap: () => Get.to(() => ChatScreen(), arguments: {
+                              'id': ally.name, // Using name as ID if ID is missing in model
+                              'name': ally.name,
+                              'image': ally.image,
+                              'isVerified': ally.isVerified,
+                            }),
+                            onTalkTap: () => Get.dialog(
+                              ConnectingDialog(ally: ally),
+                              barrierDismissible: true,
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    SizedBox(height: 16.h), // Extra bottom padding
+                  ],
                 ),
               ),
-            ],
-          ),
+            );
+          },
         ),
       ),
     );
@@ -105,6 +114,7 @@ class HomePageScreen extends StatelessWidget {
             child: Icon(
               Icons.notifications_none_rounded,
               color: AppColors.primaryColor,
+              size: 22.sp,
             ),
           ),
         ),
@@ -164,10 +174,10 @@ class HomePageScreen extends StatelessWidget {
                   padding: EdgeInsets.all(2.5.w),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    border: Border.all(color: AppColors.primaryColor, width: 2),
+                    border: Border.all(color: AppColors.primaryColor, width: 2.w),
                   ),
                   child: CircleAvatar(
-                    radius: 28.r,
+                    radius: 25.r,
                     backgroundImage: (item['image']!.startsWith('http')
                         ? NetworkImage(item['image']!)
                         : AssetImage(item['image']!)) as ImageProvider,
@@ -251,7 +261,7 @@ class HomePageScreen extends StatelessWidget {
                             decoration: BoxDecoration(
                               color: dotColor,
                               shape: BoxShape.circle,
-                              border: Border.all(color: Colors.white, width: 2),
+                              border: Border.all(color: Colors.white, width: 2.w),
                             ),
                           ),
                         ),
@@ -289,7 +299,11 @@ class HomePageScreen extends StatelessWidget {
                   color: const Color(0xFF9A9AA0),
                   fontSize: 16.sp,
                 ),
-                prefixIcon: const Icon(Icons.search, color: AppColors.textColor),
+                prefixIcon: Icon(
+                  Icons.search,
+                  color: AppColors.textColor,
+                  size: 20.sp,
+                ),
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.zero,
               ),
@@ -306,9 +320,10 @@ class HomePageScreen extends StatelessWidget {
               color: Colors.white,
               borderRadius: BorderRadius.circular(8.r),
             ),
-            child: const Icon(
+            child: Icon(
               Icons.tune_rounded,
               color: AppColors.textColor,
+              size: 20.sp,
             ),
           ),
         ),

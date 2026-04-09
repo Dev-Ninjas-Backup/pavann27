@@ -1,97 +1,75 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pavann27/features/profile/model/profile_model.dart';
+import 'package:pavann27/routes/app_routes.dart';
+
+// A simple model for profile data
+class Profile {
+  final String displayName;
+  final String subTitle;
+  final String anonymityNote;
+  final String walletBalance;
+
+  Profile({
+    required this.displayName,
+    required this.subTitle,
+    required this.anonymityNote,
+    required this.walletBalance,
+  });
+}
 
 class ProfileController extends GetxController {
-  // ── Observable state ─────────────────────────────────────────────────────────
-  final Rx<ProfileModel> profile = const ProfileModel().obs;
-  final RxBool isDarkMode = false.obs;
+  // Dummy profile data for demonstration
+  final Rx<Profile> profile = Profile(
+    displayName: 'Anonymous User',
+    subTitle: 'You are currently anonymous',
+    anonymityNote: 'Your identity is protected',
+    walletBalance: '₹45',
+  ).obs;
 
-  // ── Theme toggle ─────────────────────────────────────────────────────────────
+  // Reactive variable to track dark mode status
+  final RxBool isDarkMode = Get.isDarkMode.obs;
+
+  // Toggles the application's theme mode
   void toggleTheme(bool dark) {
     isDarkMode.value = dark;
-    profile.value = profile.value.copyWith(isDarkMode: dark);
     Get.changeThemeMode(dark ? ThemeMode.dark : ThemeMode.light);
   }
 
-  // ── Logout ───────────────────────────────────────────────────────────────────
-  void logout() {
-    Get.dialog(
-      AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: const Text(
-          'Logout',
-          style: TextStyle(fontWeight: FontWeight.w700),
-        ),
-        content: const Text('Are you sure you want to logout?'),
-        actions: [
-          TextButton(
-            onPressed: () => Get.back(),
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () {
-              Get.back();
-              // TODO: clear session and navigate to login
-              // Get.offAllNamed('/login');
-            },
-            child: const Text(
-              'Logout',
-              style: TextStyle(color: Colors.red),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  // ── Delete account ───────────────────────────────────────────────────────────
-  void deleteAccount() {
-    Get.dialog(
-      AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: const Text(
-          'Delete Account',
-          style: TextStyle(fontWeight: FontWeight.w700),
-        ),
-        content: const Text(
-          'This action is permanent and cannot be undone. All your data will be erased.',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Get.back(),
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () {
-              Get.back();
-              // TODO: call delete account API
-            },
-            child: const Text(
-              'Delete',
-              style: TextStyle(color: Colors.red),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  // ── Nav actions (stubs — replace with real routes) ───────────────────────────
+  // Navigates to the wallet/topup screen
   void openWallet() {
-    // Get.toNamed('/wallet');
+    Get.toNamed(AppRoute.topup);
+    Get.snackbar("Navigation", "Opening Wallet/Topup screen");
   }
 
+  // Navigates to the notifications screen
   void openNotifications() {
-    // Get.toNamed('/notifications');
+    Get.toNamed(AppRoute.notifications);
+    Get.snackbar("Navigation", "Opening Notifications screen");
   }
 
+  // Placeholder for privacy and security settings
   void openPrivacySecurity() {
-    // Get.toNamed('/privacy');
+    Get.snackbar("Navigation", "Opening Privacy & Security settings");
   }
 
+  // Placeholder for help and support
   void openHelpSupport() {
-    // Get.toNamed('/help');
+    Get.snackbar("Navigation", "Opening Help & Support");
+  }
+
+  // Handles user logout
+  void logout() {
+    Get.snackbar("Logged Out", "You have been successfully logged out.",
+        backgroundColor: Colors.green, colorText: Colors.white);
+    // Navigate to the login screen and clear the navigation stack
+    Get.offAllNamed(AppRoute.login);
+  }
+
+  // Handles account deletion
+  void deleteAccount() {
+    Get.snackbar("Account Deletion", "Initiating account deletion process...",
+        backgroundColor: Colors.red, colorText: Colors.white);
+    // After deletion, navigate to login or a confirmation screen
+    Get.offAllNamed(AppRoute.login);
   }
 }

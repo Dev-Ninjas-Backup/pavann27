@@ -56,7 +56,7 @@ class CallController extends GetxController {
   void endCall() {
     call.value = call.value.copyWith(state: CallState.ended);
     _stopTimers();
-    // Add any post-call navigation or cleanup logic here.
+    Get.back();
   }
 
   void _stopTimers() {

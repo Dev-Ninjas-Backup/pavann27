@@ -3,8 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pavann27/core/common/constants/widget/app_colors.dart';
 import 'package:pavann27/features/profile/controller/profile_controller.dart';
-import 'package:pavann27/features/notification/screen/notification_screen.dart';
-import 'package:pavann27/features/topup/screen/topup_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
@@ -90,8 +88,8 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     const Spacer(),
                     // Bell
-                    GestureDetector(
-                      onTap: () => Get.to(() => NotificationScreen()),
+                    InkWell(
+                      onTap: controller.openNotifications,
                       child: Container(
                         width: 40.w,
                         height: 40.w,
@@ -107,9 +105,9 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(width: 10.w),
-                    // Wallet
-                    GestureDetector(
-                      onTap: () => Get.to(() => TopupScreen()),
+                    // Wallet (Topup)
+                    InkWell(
+                      onTap: controller.openWallet,
                       child: Container(
                         padding: EdgeInsets.symmetric(
                             horizontal: 12.w, vertical: 10.h),

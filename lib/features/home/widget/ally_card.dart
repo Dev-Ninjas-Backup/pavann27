@@ -29,7 +29,7 @@ class AllyCard extends StatelessWidget {
         duration: const Duration(milliseconds: 200),
         curve: Curves.easeInOut,
         width: 360.w,
-        constraints: BoxConstraints(minHeight: 130.h),
+        constraints: BoxConstraints(minHeight: 182.h),
         padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
         decoration: BoxDecoration(
           color: isHighlighted

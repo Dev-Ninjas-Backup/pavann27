@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pavann27/features/home/model/ally_search_model.dart';
 import 'package:pavann27/features/home/model/home_page_model.dart';
 
 
