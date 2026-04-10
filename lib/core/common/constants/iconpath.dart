@@ -11,4 +11,7 @@ class Iconpath {
   static const String profileWoman4 = 'assets/icons/woman_65.jpg';
   static const String profileWoman5 = 'assets/icons/woman_68.jpg';
   static const String splashLogo = 'assets/icons/splashlogo.png';
+  static const String loginLogo = 'assets/icons/login_illustration.png';
+  static const String loginLogo2 = 'assets/icons/login_illustration2.png';
+  static const String otpLogo = 'assets/icons/otp_logo.png';
 }

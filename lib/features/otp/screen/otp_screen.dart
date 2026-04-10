@@ -1,119 +1,116 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pavann27/features/otp/controller/otp_controller.dart';
+import 'package:pavann27/core/common/constants/iconpath.dart';
 
-class OtpScreen extends StatelessWidget {
+class OtpScreen extends StatefulWidget {
+  const OtpScreen({super.key});
+
+  @override
+  State<OtpScreen> createState() => _OtpScreenState();
+}
+
+class _OtpScreenState extends State<OtpScreen> {
   final OtpController controller = Get.put(OtpController());
-
-  OtpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF8F9FA),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
-          child: Column(
-            children: [
-              const SizedBox(height: 60),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            child: Column(
+              children: [
+                SizedBox(height: 40.h),
 
-              // Logo
-              Center(
-                child: Container(
-                  width: 90,
-                  height: 90,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF6B46C1),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: const Icon(
-                    Icons.chat_bubble_rounded,
-                    size: 50,
-                    color: Colors.white,
+                // Illustration
+                Center(
+                  child: Image.asset(
+                    Iconpath.otpLogo,
+                    height: 220.h,
+                    fit: BoxFit.contain,
+                    errorBuilder: (context, error, stackTrace) =>
+                        _buildPlaceholderIllustration(),
                   ),
                 ),
-              ),
 
-              const SizedBox(height: 50),
+                SizedBox(height: 30.h),
 
-              // Avatars
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _buildAvatar(false),
-                  const SizedBox(width: 20),
-                  _buildAvatar(true),
-                ],
-              ),
-
-              const SizedBox(height: 32),
-
-              // Title
-              const Text(
-                "Someone's here.",
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
+                // Title
+                Text(
+                  "Everybody needs an ally.",
+                  style: TextStyle(
+                    fontSize: 26.sp,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-              ),
-              const SizedBox(height: 12),
-              const Text(
-                "Allies connects you with a real person to talk to — one-to-one",
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.black54,
-                  height: 1.4,
+
+                SizedBox(height: 8.h),
+
+                // Subtitle
+                Text(
+                  "Allies is here when you need it.",
+                  style: TextStyle(
+                    fontSize: 15.sp,
+                    color: Colors.black54,
+                    height: 1.4,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
-              ),
 
-              const SizedBox(height: 40),
+                SizedBox(height: 32.h),
 
-              // Progress dots
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(3, (index) {
-                  return Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 4),
-                    width: index == 1 ? 24 : 8,
-                    height: 8,
-                    decoration: BoxDecoration(
-                      color: index == 1
-                          ? const Color(0xFF6B46C1)
-                          : Colors.grey.shade300,
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                  );
-                }),
-              ),
-
-              const SizedBox(height: 50),
-
-              // OTP Section
-              const Text(
-                "Enter your OTP",
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black87,
+                // Progress Dots
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(3, (index) {
+                    return AnimatedContainer(
+                      duration: const Duration(milliseconds: 300),
+                      margin: EdgeInsets.symmetric(horizontal: 4.w),
+                      width: index == 1 ? 28.w : 8.w,
+                      height: 8.h,
+                      decoration: BoxDecoration(
+                        color: index == 1
+                            ? const Color(0xFF7C4DFF)
+                            : Colors.grey.shade300,
+                        borderRadius: BorderRadius.circular(17.r),
+                      ),
+                    );
+                  }),
                 ),
-              ),
-              const SizedBox(height: 8),
-              Obx(() => Text(
-                    "Enter the code sent to ${controller.phoneNumber.value}",
-                    style: const TextStyle(
-                      fontSize: 15,
-                      color: Colors.black54,
-                    ),
-                  )),
 
-              const SizedBox(height: 32),
+                SizedBox(height: 30.h),
 
-              // OTP Input Fields
-              Row(
+                // OTP Header
+                Text(
+                  "Enter your OTP",
+                  style: TextStyle(
+                    fontSize: 24.sp,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black87,
+                  ),
+                ),
+
+                SizedBox(height: 8.h),
+
+                Obx(() => Text(
+                      "Enter the code sent to ${controller.phoneNumber.value}",
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        color: Colors.black54,
+                      ),
+                    )),
+
+                SizedBox(height: 32.h),
+
+                // OTP Input Boxes
+                 Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: List.generate(6, (index) {
                   return SizedBox(
@@ -155,77 +152,81 @@ class OtpScreen extends StatelessWidget {
                 }),
               ),
 
-              const SizedBox(height: 40),
+                SizedBox(height: 30.h),
 
-              // Verify Button
-              Obx(() => SizedBox(
-                    width: double.infinity,
-                    height: 56,
-                    child: ElevatedButton(
-                      onPressed: controller.isLoading.value
-                          ? null
-                          : controller.verifyOtp,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF6B46C1),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                // Verify Button
+                Obx(() => SizedBox(
+                      width: double.infinity,
+                      height: 52.h,
+                      child: ElevatedButton(
+                        onPressed: controller.isLoading.value
+                            ? null
+                            : controller.verifyOtp,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF7C4DFF),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12.r),
+                          ),
+                          elevation: 0,
                         ),
-                        elevation: 0,
-                      ),
-                      child: controller.isLoading.value
-                          ? const CircularProgressIndicator(color: Colors.white)
-                          : const Text(
-                              "Verify",
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white,
+                        child: controller.isLoading.value
+                            ? SizedBox(
+                                height: 24.h,
+                                width: 24.h,
+                                child: const CircularProgressIndicator(
+                                  color: Colors.white,
+                                  strokeWidth: 2.5,
+                                ),
+                              )
+                            : Text(
+                                "Verify",
+                                style: TextStyle(
+                                  fontSize: 17.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white,
+                                ),
                               ),
-                            ),
-                    ),
-                  )),
+                      ),
+                    )),
 
-              const SizedBox(height: 24),
+                SizedBox(height: 24.h),
 
-              // Resend Timer
-              Obx(
-                () => GestureDetector(
-                  onTap: controller.canResend.value ? controller.resendOtp : null,
-                  child: Text(
-                    controller.resendText, // Access the getter directly
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: controller.canResend.value ? const Color(0xFF6B46C1) : Colors.grey,
-                      fontWeight: controller.canResend.value ? FontWeight.w600 : FontWeight.normal,
-                    ),
-                  ),
-                ),
-              ),
+                // Resend Text
+                Obx(() => GestureDetector(
+                      onTap: controller.canResend.value ? controller.resendOtp : null,
+                      child: Text(
+                        controller.resendText.isEmpty ? "Resend OTP" : controller.resendText,
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          color: controller.canResend.value
+                              ? const Color(0xFF7C4DFF)
+                              : Colors.grey,
+                          fontWeight: controller.canResend.value
+                              ? FontWeight.w600
+                              : FontWeight.normal,
+                        ),
+                      ),
+                    )),
 
-              const Spacer(),
-
-              // The rest of your existing code...
-            ],
+                SizedBox(height: 40.h),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  Widget _buildAvatar(bool isSpecial) {
+  Widget _buildPlaceholderIllustration() {
     return Container(
-      width: 80,
-      height: 80,
+      height: 280.h,
+      width: 280.w,
       decoration: BoxDecoration(
-        color: const Color(0xFFE0D4FF),
-        shape: BoxShape.circle,
+        color: Colors.grey.shade100,
+        borderRadius: BorderRadius.circular(30.r),
       ),
-      child: Center(
-        child: Icon(
-          Icons.person,
-          size: 40,
-          color: const Color(0xFF6B46C1),
-        ),
+      child: const Center(
+        child: Text("OTP Illustration", style: TextStyle(color: Colors.grey)),
       ),
     );
   }
